@@ -25,12 +25,45 @@ TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_fog
 TARGET_RECOVERY_DEVICE_MODULES := libinit_fog
 
 # Kernel
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-KERNEL_DEFCONFIG := vendor/fog-perf_defconfig
-KERNEL_CUSTOM_LLVM := true
-KERNEL_FULL_LLVM := true
-TARGET_KERNEL_SOURCE := kernel/xiaomi/fog
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_IMAGE_NAME  := Image.gz
+BOARD_KERNEL_OFFSET      := 0x00008000
+BOARD_KERNEL_PAGESIZE    := 4096
+BOARD_RAMDISK_OFFSET     := 0x01000000
+BOARD_TAGS_OFFSET        := 0x00000100
 
+BOARD_BOOT_HEADER_VERSION := 3
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)-kernel/dtbo.img
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)-kernel/dtb.img
+
+BOARD_KERNEL_CMDLINE += \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=4e00000.dwc3 \
+    loop.max_part=7 \
+    lpm_levels.sleep_disabled=1 \
+    msm_rtb.filter=0x237 \
+    service_locator.enable=1 \
+    swiotlb=2048 \
+    kpri=off \
+    cgroup_disable=pressure
+
+KERNEL_CUSTOM_LLVM := true
+# KERNEL_FULL_LLVM := true
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CONFIG := vendor/fog-perf_defconfig
+TARGET_KERNEL_HEADERS := kernel/xiaomi/fog
+TARGET_KERNEL_SOURCE := kernel/xiaomi/fog
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_LINUX_KERNEL_VERSION := 4.19
+
+# Partitions 
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # OTA assert
 TARGET_OTA_ASSERT_DEVICE := fog,wind,rain

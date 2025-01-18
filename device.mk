@@ -75,7 +75,22 @@ PPRODUCT_SYSTEM_PROPERTIES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024 \
     ro.vendor.perf.scroll_opt=1 \
-    ro.launcher.blur.appLaunch=0
+    ro.launcher.blur.appLaunch=0 \
+    debug.renderengine.backend=skiaglthreaded \
+    renderthread.skia.reduceopstasksplitting=true \
+    debug.hwui.renderer=skiagl \
+    debug.hwui.use_buffer_age=false \
+    debug.hwui.use_hint_manager=true
+
+PPRODUCT_VENDOR_PROPERTIES += \
+    ro.config.avoid_gfx_accel=true 
+
+# Disable Iorapd
+PPRODUCT_SYSTEM_PROPERTIES += \
+    ro.iorapd.enable=false \
+    iorapd.perfetto.enable=false \
+    iorapd.readahead.enable=false \
+    persist.device_config.runtime_native_boot.iorap_readahead_enable=false
 
 # Media
 PRODUCT_ODM_PROPERTIES += \

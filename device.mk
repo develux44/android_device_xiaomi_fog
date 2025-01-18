@@ -58,52 +58,65 @@ PRODUCT_PACKAGES += \
 # Health
 TARGET_USE_HIDL_QTI_HEALTH := true
 
+# HIDL
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/hidl/compatibility_matrix.xml
+
 # Media
 PRODUCT_ODM_PROPERTIES += \
     media.settings.xml=/vendor/etc/media_profiles_khaje.xml
 
 # NFC
-# TARGET_COMMON_QTI_COMPONENTS += \
-#     nfc
+TARGET_COMMON_QTI_COMPONENTS += \
+    nfc
 
-# TARGET_NFC_SKU := c3qn
-# ODM_MANIFEST_SKUS += $(TARGET_NFC_SKU)
-# ODM_MANIFEST_C3QN_FILES := $(DEVICE_PATH)/configs/hidl/manifest_c3qn.xml
+TARGET_NFC_SKU := c3qn
+ODM_MANIFEST_SKUS += $(TARGET_NFC_SKU)
+ODM_MANIFEST_C3QN_FILES := $(DEVICE_PATH)/configs/hidl/manifest_c3qn.xml
 
-# PPRODUCT_PACKAGES += \
-#     android.hardware.nfc@1.2-service \
-#     android.hardware.secure_element@1.2-service \
-#     com.android.nfc_extras \
-#     libchrome.vendor \
-#     NfcNci \
-#     SecureElement \
-#     Tag
+PPRODUCT_PACKAGES += \
+    android.hardware.nfc@1.2-service \
+    android.hardware.secure_element@1.2-service \
+    com.android.nfc_extras \
+    libchrome.vendor \
+    NfcNci \
+    SecureElement \
+    Tag
 
-# PPRODUCT_SYSTEM_PROPERTIES += \
-#     ro.nfc.port=I2C \
-#     ro.hardware.nfc_nci=pn8x
+PPRODUCT_SYSTEM_PROPERTIES += \
+    ro.nfc.port=I2C \
+    ro.hardware.nfc_nci=pn8x
 
-# PRODUCT_COPY_FILES += \
-#     frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_c3qn/android.hardware.nfc.ese.xml \
-#     frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_c3qn/android.hardware.nfc.uicc.xml
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_c3qn/android.hardware.nfc.ese.xml \
+    frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_c3qn/android.hardware.nfc.uicc.xml
 
-# PRODUCT_COPY_FILES += \
-#     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/,$(TARGET_COPY_OUT_VENDOR)/etc)
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc/,$(TARGET_COPY_OUT_VENDOR)/etc)
 # Overlays
 PRODUCT_PACKAGES += \
-    AOSPASpesFrameworksOverlay \
-    SpesFrameworksOverlay \
-    SpesSettingsOverlay \
-    SpesSystemUIOverlay \
-    SpesWifiOverlay \
-    SpesWifiMainline \
-    SettingsProvider2201117TGOverlay \
-    SettingsProvider2201117TIOverlay \
-    SettingsProvider2201117TYOverlay
+    AOSPAFogFrameworksOverlay \
+    FogPowerFrameworksOverlay \
+    FogFrameworksOverlay \
+    FogSettingsOverlay \
+    FogSystemUIOverlay \
+    FogWifiOverlay \
+    FogWifiMainline \
+    SettingsProvider220333QAGOverlay \
+    SettingsProvider220333QLOverlay \
+    SettingsProvider220333QBIOverlay \
+    SettingsProvider220333QNYOverlay
+
+# Remove packages
+PRODUCT_PACKAGES += \
+    RemovePackages
 
 # Rootdir / Init files
 PRODUCT_PACKAGES += \
     init.device.rc
+
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service.basic
 
 # Sensors
 PRODUCT_PACKAGES += \

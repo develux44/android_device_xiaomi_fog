@@ -18,6 +18,7 @@ DEVICE_PATH := device/xiaomi/fog
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 
 # HIDL
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += $(DEVICE_PATH)/configs/hidl/xiaomi_framework_compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/hidl/xiaomi_manifest.xml
 
 # Init
@@ -32,12 +33,15 @@ BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_RAMDISK_OFFSET     := 0x01000000
 BOARD_TAGS_OFFSET        := 0x00000100
 
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_KERNEL_SEPARATED_DTBO := true
+
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+#BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)-kernel/dtbo.img
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)-kernel/dtb.img
+#BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)-kernel/dtbo.img
+#TARGET_PREBUILT_DTB := $(DEVICE_PATH)-kernel/dtb.img
 
 BOARD_KERNEL_CMDLINE += \
     androidboot.hardware=qcom \
@@ -52,7 +56,7 @@ BOARD_KERNEL_CMDLINE += \
     cgroup_disable=pressure
 
 KERNEL_CUSTOM_LLVM := true
-# KERNEL_FULL_LLVM := true
+KERNEL_FULL_LLVM := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CONFIG := vendor/fog-perf_defconfig
 TARGET_KERNEL_HEADERS := kernel/xiaomi/fog

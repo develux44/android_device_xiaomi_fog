@@ -9,6 +9,7 @@ LOCAL_OVERRIDES_PACKAGES := \
     deviceintegrationservice \
     linktowindows \
     virtual_keyboard \
+    Drive \
     Abstruct
     
 LOCAL_UNINSTALLABLE_MODULE := true

@@ -57,8 +57,7 @@ void load_redmi_fog() {
     property_override("ro.product.brand", "Redmi");
     property_override("ro.product.device", "fog");
     property_override("ro.product.manufacturer", "Xiaomi");
-    property_override("ro.product.marketname", "Redmi 10C");
-    property_override("ro.product.model", "220333QAG");
+    property_override("ro.product.model", "Redmi 10C");
     property_override("ro.product.mod_device", "fog_global");
     property_override("ro.product.name", "fog_global");
     property_override("vendor.usb.product_string", "Redmi 10C");
@@ -69,8 +68,7 @@ void load_redmi_fog_in() {
     property_override("ro.product.brand", "Redmi");
     property_override("ro.product.device", "fog");
     property_override("ro.product.manufacturer", "Xiaomi");
-    property_override("ro.product.marketname", "Redmi 10");
-    property_override("ro.product.model", "220333QBI");
+    property_override("ro.product.model", "Redmi 10");
     property_override("ro.product.mod_device", "fog_in");
     property_override("ro.product.name", "fog_in");
     property_override("vendor.usb.product_string", "Redmi 10");
@@ -81,8 +79,7 @@ void load_redmi_fog_in2() {
     property_override("ro.product.brand", "Redmi");
     property_override("ro.product.device", "fog");
     property_override("ro.product.manufacturer", "Xiaomi");
-    property_override("ro.product.marketname", "Redmi 10 Power");
-    property_override("ro.product.model", "220333QBI");
+    property_override("ro.product.model", "Redmi 10 Power");
     property_override("ro.product.mod_device", "fog_in2");
     property_override("ro.product.name", "fog_in2");
     property_override("vendor.usb.product_string", "Redmi 10 Power");
@@ -93,8 +90,7 @@ void load_redmi_rain() {
     property_override("ro.product.brand", "Redmi");
     property_override("ro.product.device", "rain");
     property_override("ro.product.manufacturer", "Xiaomi");
-    property_override("ro.product.marketname", "Redmi 10C");
-    property_override("ro.product.model", "220333QNY");
+    property_override("ro.product.model", "Redmi 10C");
     property_override("ro.product.mod_device", "rain_global");
     property_override("ro.product.name", "rain_global");
     property_override("vendor.usb.product_string", "Redmi 10C");
@@ -105,8 +101,7 @@ void load_redmi_wind() {
     property_override("ro.product.brand", "Redmi");
     property_override("ro.product.device", "wind");
     property_override("ro.product.manufacturer", "Xiaomi");
-    property_override("ro.product.marketname", "Redmi 10C");
-    property_override("ro.product.model", "220333QL");
+    property_override("ro.product.model", "Redmi 10C");
     property_override("ro.product.mod_device", "wind_global");
     property_override("ro.product.name", "wind_global");
     property_override("vendor.usb.product_string", "Redmi 10C");
@@ -138,36 +133,13 @@ void vendor_load_properties() {
     struct sysinfo sys;
     sysinfo(&sys);
 
-    if (sys.totalram > 5072ull * 1024 * 1024) {
-        // from - phone-xhdpi-6144-dalvik-heap.mk
-        heapstartsize = "16m";
-        heapgrowthlimit = "256m";
-        heapsize = "512m";
-        heaptargetutilization = "0.5";
-        heapminfree = "8m";
-        heapmaxfree = "32m";
-    } else if (sys.totalram > 3072ull * 1024 * 1024) {
-        // from - phone-xhdpi-4096-dalvik-heap.mk
-        heapstartsize = "8m";
-        heapgrowthlimit = "192m";
-        heapsize = "512m";
-        heaptargetutilization = "0.6";
-        heapminfree = "8m";
-        heapmaxfree = "16m";
-    } else {
-        // from - phone-xhdpi-2048-dalvik-heap.mk
-        heapstartsize = "8m";
-        heapgrowthlimit = "192m";
-        heapsize = "512m";
-        heaptargetutilization = "0.75";
-        heapminfree = "512k";
-        heapmaxfree = "8m";
-    }
-
-    property_override("dalvik.vm.heapstartsize", heapstartsize);
-    property_override("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
-    property_override("dalvik.vm.heapsize", heapsize);
-    property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
-    property_override("dalvik.vm.heapminfree", heapminfree);
-    property_override("dalvik.vm.heapmaxfree", heapmaxfree);
+    property_override("dalvik.vm.heapstartsize", "8m");
+    property_override("dalvik.vm.heapgrowthlimit", "128m");
+    property_override("dalvik.vm.heapsize", "256m");
+    property_override("dalvik.vm.heaptargetutilization", "0.75");
+    property_override("dalvik.vm.heapminfree", "512k");
+    property_override("dalvik.vm.heapmaxfree", "8m");
+    // SafetyNet workaround
+    property_override("ro.oem_unlock_supported", "0");
+    property_override("ro.boot.verifiedbootstate", "green");
 }

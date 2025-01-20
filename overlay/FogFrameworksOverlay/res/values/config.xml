@@ -189,6 +189,6 @@
         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
     -->
     <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
-    <string name="config_stockFingerprint" translatable="false">Redmi/fog_global/fog:14/TKQ1.221114.001/V14.0.2.0.SGEMIXM:user/release-keys</string>    
+    <string name="config_stockFingerprint" translatable="false">Redmi/fog_global/fog:13/TKQ1.221114.001/V14.0.8.0.TGEMIXM:user/release-keys</string>    
     <bool name="config_avoidGfxAccel">true</bool>
 </resources>
